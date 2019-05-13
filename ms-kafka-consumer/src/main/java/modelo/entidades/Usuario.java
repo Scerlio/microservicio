@@ -3,6 +3,7 @@ package modelo.entidades;
 import org.springframework.data.annotation.Id;
 
 
+
 public class Usuario {
 
 	@Id

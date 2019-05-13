@@ -16,7 +16,6 @@ import modelo.gestion.UsuarioDeserializer;
 @Configuration @EnableKafka
 public class KafkaConfig {
 
-	private static String TOPIC = "DOOM";
 	private static String BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094";
 	//private static String BOOTSTRAP_SERVERS = "http://kafka1:19092,http://kafka2:19093,http://kafka3:19094";
 	
@@ -29,8 +28,7 @@ public class KafkaConfig {
 		props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 		
 		KafkaConsumer<String, Usuario> consumer = new KafkaConsumer<String, Usuario>(props);
-		consumer.subscribe(Collections.singleton(TOPIC)); // Se suscribe a una lista de topics, que reemplazan a los que ya esten subscritos
-
+		
 		return consumer;
 	} 
 }
