@@ -1,23 +1,16 @@
 package modelo.controladores;
 
-import java.time.Duration;
-import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-
 import config.KafkaConfig;
 import modelo.entidades.Usuario;
 
 @Component
-public class Recurso {
+public class Recurso<T> {
 
 
 	private static Logger log = LoggerFactory.getLogger(Recurso.class.getName());
@@ -27,20 +20,19 @@ public class Recurso {
 	private Controlador controlador;
 
 	@KafkaListener(topics = "DOOM")
-	public void recibirUsuario(Object content) {
+	public void recibirUsuario(T content) {
 
 		log.info("received content= '{}'", content);
-		ConsumerRecords<String, Usuario> records = (ConsumerRecords<String, Usuario>) content;
-		
-		for(ConsumerRecord<String, Usuario> r : records) {
+		@SuppressWarnings("unchecked")
+		ConsumerRecord<String, Usuario> records = (ConsumerRecord<String, Usuario>) content;
 
-			log.info("\nKey: " + r.key() + ", Value: " +  r.value());
-			log.info("\nPatricion: " + r.partition() + ", offset: " + r.offset());
 
-			Usuario u = r.value();
-			System.out.println("\nGuardar: " + u + "\n");
+		log.info("\nKey: " + records.key() + ", Value: " +  records.value());
+		log.info("\nPatricion: " + records.partition() + ", offset: " + records.offset());
 
-			controlador.guardarUsuario(r.value());
-		}		
+		Usuario u = records.value();
+		System.out.println("\nGuardar: " + u + "\n");
+
+		controlador.guardarUsuario(records.value());
 	}
 }
