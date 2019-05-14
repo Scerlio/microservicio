@@ -10,7 +10,7 @@ import config.KafkaConfig;
 import modelo.entidades.Usuario;
 
 @Component
-public class Recurso<T> {
+public class Recurso {
 
 
 	private static Logger log = LoggerFactory.getLogger(Recurso.class.getName());
@@ -20,7 +20,7 @@ public class Recurso<T> {
 	private Controlador controlador;
 
 	@KafkaListener(topics = "DOOM")
-	public void recibirUsuario(T content) {
+	public void recibirUsuario(Object content) {
 
 		log.info("received content= '{}'", content);
 		@SuppressWarnings("unchecked")
