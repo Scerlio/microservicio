@@ -16,8 +16,8 @@ import org.springframework.stereotype.Controller;
 import config.KafkaConfig;
 import modelo.entidades.Usuario;
 
-@EnableKafka @Component
-public class Recurso    {
+@Component
+public class Recurso {
 
 
 	private static Logger log = LoggerFactory.getLogger(Recurso.class.getName());
@@ -27,11 +27,11 @@ public class Recurso    {
 	private Controlador controlador;
 
 	@KafkaListener(topics = "DOOM")
-	@Bean 
-	public void recibirUsuario() {
-		final Consumer<String, Usuario> consumer = kc.createConsumer();
+	public void recibirUsuario(Object content) {
 
-		ConsumerRecords<String, Usuario> records =consumer.poll(Duration.ofSeconds(3));
+		log.info("received content= '{}'", content);
+		ConsumerRecords<String, Usuario> records = (ConsumerRecords<String, Usuario>) content;
+		
 		for(ConsumerRecord<String, Usuario> r : records) {
 
 			log.info("\nKey: " + r.key() + ", Value: " +  r.value());
