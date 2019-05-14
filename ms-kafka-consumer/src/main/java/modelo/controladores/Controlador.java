@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import modelo.entidades.Usuario;
@@ -23,6 +24,11 @@ public class Controlador {
 	@GetMapping("/listar")
 	public  List<Usuario> listarUsuarios() {
 		return gu.listar();
+	}
+	
+	@GetMapping("/buscar")
+	public  List<Usuario> buscarUsuariosApellido(@RequestParam String apellido) {
+		return gu.buscarApellido(apellido);
 	}
 
 }
