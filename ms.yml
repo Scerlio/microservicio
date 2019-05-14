@@ -1,0 +1,107 @@
+version: '3.7'
+
+networks:
+  v2:
+    
+services:
+  zoo1:
+    image: zookeeper
+    hostname: zoo1
+    ports:
+      - "2181"
+    networks:
+      - v2 
+    
+  kafka1:
+    image: confluentinc/cp-kafka
+    hostname: kafka1
+    ports:
+      - "9092"    
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka1:19092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    networks:
+      - v2 
+    volumes:
+      - ./zk-single-kafka-multiple/kafka1/data:/var/lib/kafka/data
+    depends_on:
+      - zoo1
+
+  kafka2:
+    image: confluentinc/cp-kafka
+    hostname: kafka2
+    ports:
+      - "9093"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka2:19093,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
+      KAFKA_BROKER_ID: 2
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    networks:
+      - v2 
+    volumes:
+      - ./zk-single-kafka-multiple/kafka2/data:/var/lib/kafka/data
+    depends_on:
+      - zoo1
+
+  kafka3:
+    image: confluentinc/cp-kafka
+    hostname: kafka3
+    ports:
+      - "9094"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka3:19094,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
+      KAFKA_BROKER_ID: 3
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    networks:
+      - v2 
+    volumes:
+      - ./zk-single-kafka-multiple/kafka3/data:/var/lib/kafka/data
+    depends_on:
+      - zoo1
+      
+  mongo:
+    image: mongo
+    networks:
+      - v2  
+     
+  consumer:
+    image: ms-kafka-consumer
+    depends_on:
+     - mongo
+     - zoo1
+     - kafka1
+     - kafka2
+     - kafka3
+    ports:
+     - "8112"
+    networks:
+     - v2
+     
+  producer:
+    image: ms-kafka-producer
+    depends_on:
+     - zoo1
+     - kafka1
+     - kafka2
+     - kafka3
+    ports:
+     - "8111"
+    networks:
+     - v2
+    
+  gateway:
+    image: gateway
+    networks:
+     - v2
+    ports:
+     - "8080:8080"

@@ -9,7 +9,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-group = 'routing-zuul'
+group = 'ms'
 version = '0.0.1-SNAPSHOT'
 
 bootJar {
