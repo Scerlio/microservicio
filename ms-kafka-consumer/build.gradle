@@ -29,6 +29,7 @@ docker {
     copySpec.from(tasks.unpack.outputs).into("dependency")
     buildArgs(['DEPENDENCY': "dependency"])
 }
+
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
