@@ -10,7 +10,7 @@ group = 'ms'
 version = '0.0.1-SNAPSHOT'
 
 bootJar {
-    baseName = 'ms-kafka-consumer'
+    baseName = 'eureka-server'
     version =  '0.1.0'
 }
 
