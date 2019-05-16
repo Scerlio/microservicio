@@ -78,10 +78,12 @@ services:
     image: ms-kafka-consumer
     depends_on:
      - mongo
+     - eureka
      - zoo1
      - kafka1
      - kafka2
      - kafka3
+     
     ports:
      - "8112"
     networks:
@@ -94,6 +96,7 @@ services:
      - kafka1
      - kafka2
      - kafka3
+     - eureka
     ports:
      - "8111"
     networks:
@@ -103,5 +106,13 @@ services:
     image: gateway
     networks:
      - v2
+    depends_on:
+     - eureka
     ports:
      - "8080:8080"
+  eureka:
+    image: eureka-server
+    networks:
+     - v2
+    ports:
+     - "8761"
