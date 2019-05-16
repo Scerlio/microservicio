@@ -16,12 +16,8 @@ import modelo.entidades.Usuario;
 @EnableKafka @Configuration
 public class KafkaConfig {
 
-	//private static String BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094";
+	private static String BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094";
 
-	
-	private static String BOOTSTRAP_SERVERS = "http://kafka1:19092,http://kafka2:19093,http://kafka3:19094";
-
-	
 	@Bean
 	public Producer<String, Usuario> createProducer() {
 		Properties props = new Properties();

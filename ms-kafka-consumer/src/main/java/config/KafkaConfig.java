@@ -16,11 +16,7 @@ import modelo.gestion.UsuarioDeserializer;
 @Configuration @EnableKafka
 public class KafkaConfig {
 
-
-	//private static String BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094";
-
-	private static String BOOTSTRAP_SERVERS = "http://kafka1:19092,http://kafka2:19093,http://kafka3:19094";
-
+	private static String BOOTSTRAP_SERVERS = "localhost:9092,localhost:9093,localhost:9094";
 	
 	@Bean
 	public static ConsumerFactory<String, Usuario> createConsumer() {
