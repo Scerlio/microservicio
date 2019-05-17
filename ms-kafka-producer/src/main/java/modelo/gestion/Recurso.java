@@ -25,7 +25,6 @@ import modelo.entidades.Usuario;
 public class Recurso {
 
 	private String TOPIC = "DOOM";	
-	//Random rand = new Random();
 	private static KafkaConfig kc = new KafkaConfig();
 	
 	
@@ -35,7 +34,6 @@ public class Recurso {
 	@PostMapping(path="/enviar", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String mandarUsuario (@RequestBody Usuario u) throws InterruptedException, ExecutionException {
 		// Se usa para que la misma key siempre vaya a la misma particion
-		//u.setId(String.valueOf(rand.nextInt(50))); //fix
 		//String key = u.getId(); //fix
 		
 		final Producer<String, Usuario> producer = kc.createProducer();

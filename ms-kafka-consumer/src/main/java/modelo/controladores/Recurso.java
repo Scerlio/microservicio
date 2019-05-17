@@ -23,7 +23,6 @@ public class Recurso {
 	public void recibirUsuario(Object content) {
 
 		log.info("received content= '{}'", content);
-		@SuppressWarnings("unchecked")
 		ConsumerRecord<String, Usuario> records = (ConsumerRecord<String, Usuario>) content;
 
 
