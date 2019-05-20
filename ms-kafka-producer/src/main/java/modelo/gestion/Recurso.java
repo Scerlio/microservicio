@@ -9,19 +9,23 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import cfg.KafkaConfig;
 import modelo.entidades.Usuario;
 
 @Service
 @RestController
-@RequestMapping("kafka")
+@Scope("request")
+//@RequestMapping("index")
 public class Recurso {
 
 	private String TOPIC = "DOOM";	
@@ -31,10 +35,14 @@ public class Recurso {
 	// Se crea un logger para la clase
 	Logger log = LoggerFactory.getLogger(Recurso.class);
 	
-	@PostMapping(path="/enviar", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String mandarUsuario (@RequestBody Usuario u) throws InterruptedException, ExecutionException {
+	@PostMapping(path="/mandarUsuario")
+	public ModelAndView mandarUsuario (@RequestParam("nombre") String nombre, 
+			@RequestParam("apellido") String apellido) throws InterruptedException, ExecutionException {
 		// Se usa para que la misma key siempre vaya a la misma particion
-		//String key = u.getId(); //fix
+
+		Usuario u = new Usuario();
+		u.setNombre(nombre);
+		u.setApellido(apellido);
 		
 		final Producer<String, Usuario> producer = kc.createProducer();
 		
@@ -65,7 +73,7 @@ public class Recurso {
 		// Flush and close
 		producer.close();
 		
-		return "Enviado";
+		return new ModelAndView("redirect:");
 	}
 	
 }
