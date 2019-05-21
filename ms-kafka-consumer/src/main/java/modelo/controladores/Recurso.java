@@ -15,8 +15,6 @@ public class Recurso {
 
 	private static Logger log = LoggerFactory.getLogger(Recurso.class.getName());
 	@Autowired
-	static KafkaConfig kc;
-	@Autowired
 	private Controlador controlador;
 
 	@KafkaListener(topics = "DOOM")
