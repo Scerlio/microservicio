@@ -8,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuarioComponent implements OnInit {
 
-    usuarios$: Object;
+  usuario$: Object;
   constructor(private data: UsuarioService) { }
 
   ngOnInit() {
-      this.data.getUsuarios().subscribe(
-      data => this.usuarios$ = data
+      this.data.listarUsuarios().subscribe(
+      data => this.usuario$ = data
     );
   }
 

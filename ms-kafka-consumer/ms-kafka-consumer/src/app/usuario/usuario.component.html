@@ -1,9 +1,13 @@
-<h2>Mis Usuarios</h2>
-<ul class="usuarios">
+<h2>Lista de Usuarios</h2>
+
+<ul class="usuario">
 <!-- <li>
-  <span class="badge">{{hero.id}}</span> {{hero.name}}
+  <span class="badge">{{usuario.id}}</span> {{usuario.name}}
 </li> -->
-<li *ngFor="let usuario of usuarios$" >
-    <span class="badge">{{usuario.id}}</span> {{usuario.name}}
+
+<li *ngFor="let i of usuario$" >
+
+    <span class="badge">{{i.id}}</span> 
+    {{i.nombre}}
 </li>
 </ul>

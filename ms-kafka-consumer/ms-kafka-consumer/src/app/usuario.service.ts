@@ -8,7 +8,7 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  getUsuarios() {
+  listarUsuarios() {
     const url = 'http://localhost:8112/listar';
     return this.http.get(url);
   }
