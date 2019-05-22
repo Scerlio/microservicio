@@ -3,7 +3,7 @@ package modelo.controladores;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +22,7 @@ public class Controlador {
 	}
 	
 	@GetMapping("/listar")
+	@CrossOrigin("http://localhost:4200")
 	public  List<Usuario> listarUsuarios() {
 		return gu.listar();
 	}
