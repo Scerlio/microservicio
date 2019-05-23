@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'front';
+  myvar = true;
+  statesStrings = ['usuarios'];
+  samples: string[] = ['Lista de héroes'];
+  currentSample: number = 0;
+
+  showSample(index: number) {
+    this.currentSample = index;
+  }
 }

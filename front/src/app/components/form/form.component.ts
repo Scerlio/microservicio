@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
+import { Usuario } from 'src/app/model/usuario';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -7,6 +9,8 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
+  @Output() signal = new EventEmitter<Usuario>();
+  newIdUsuario: string = '';
   newNombreUsuario: string = '';
   newApellidoUsuario: string = '';
   constructor() { }
@@ -14,8 +18,8 @@ export class FormComponent implements OnInit {
   ngOnInit() {
   }
 
-  addHero() {
-    this.signal.emit(this.newNombreUsuario, this.newApellidoUsuario);
+  addUsuario() {
+    this.signal.emit(new Usuario(this.newIdUsuario, this.newNombreUsuario, this.newApellidoUsuario));
     this.newNombreUsuario = '';
   }
 }
