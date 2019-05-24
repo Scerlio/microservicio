@@ -13,7 +13,7 @@ import { FormComponent } from './components/form/form.component';
 
 import { UsuarioService } from './services/usuario.service';
 
-const formState = { name: 'Usuarios', url: '/usuarios',  component: ListaUsuariosComponent };
+const formState = { name: 'usuarios', url: '/usuarios',  component: ListaUsuariosComponent };
 
 const statesArray = [formState];
 @NgModule({
