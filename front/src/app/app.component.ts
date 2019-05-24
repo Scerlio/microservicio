@@ -9,8 +9,8 @@ export class AppComponent {
   title = 'front';
   myvar = true;
   statesStrings = ['usuarios'];
-  samples: string[] = ['Lista de héroes'];
-  currentSample: number = 0;
+  samples: string[] = ['Lista de usuarios'];
+  currentSample = 0;
 
   showSample(index: number) {
     this.currentSample = index;
