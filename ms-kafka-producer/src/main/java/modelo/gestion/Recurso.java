@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +31,7 @@ public class Recurso {
 	Logger log = LoggerFactory.getLogger(Recurso.class);
 
 	@PostMapping(path="/enviar")
+	@CrossOrigin("http://localhost:4200")
 	public void mandarUsuario (@RequestBody Usuario u) throws InterruptedException, ExecutionException {
 		// Se usa para que la misma key siempre vaya a la misma particion
 
