@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  front:
+    image: front
+    build: .\front\        
+    environment:
+      NODE_ENV: production
+    ports:
+      - 4200:4200
+    

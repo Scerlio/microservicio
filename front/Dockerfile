@@ -1,8 +1,8 @@
 FROM node:10.13-alpine
-ENV NODE_ENV production
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
-COPY . .
+ENV http_proxy http://alca.proxy.corp.sopra:8080/ 
+ENV https_proxy http://alca.proxy.corp.sopra:8080/
+WORKDIR /app
 EXPOSE 4200
-CMD npm start
+COPY ./ /app/
+RUN npm install
+ENTRYPOINT npm start 
