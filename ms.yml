@@ -116,16 +116,13 @@ services:
      - v2
     ports:
      - "8761"
-     
+
   front:
     image: front
-    build: .\front
-    environment:
-      NODE_ENV: production
-    networks:
-     - v2
-    ports:
-     - "4200:4200"
     depends_on:
      - consumer
      - producer
+    ports:
+      - 80:80/tcp
+    networks:
+      - v2

@@ -1,7 +1,11 @@
 version: '3.7'
+networks:
+  v2:
 
 services:
   front:
     image: front
     ports:
-      - "8080:80"
+      - 80:80/tcp
+    networks:
+      - v2

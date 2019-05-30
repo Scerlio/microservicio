@@ -31,7 +31,7 @@ public class Recurso {
 	Logger log = LoggerFactory.getLogger(Recurso.class);
 
 	@PostMapping(path="/enviar")
-	@CrossOrigin("http://localhost:4200")
+	@CrossOrigin("http://localhost:80")
 	public void mandarUsuario (@RequestBody Usuario u) throws InterruptedException, ExecutionException {
 		// Se usa para que la misma key siempre vaya a la misma particion
 
