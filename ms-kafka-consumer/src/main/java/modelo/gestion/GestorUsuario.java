@@ -30,4 +30,8 @@ public class GestorUsuario {
 		return usuarioRepository.findByApellido(apellido);
 	}
 	
+	public void borrar (String id) {
+		usuarioRepository.deleteById(id);
+	}
+	
 }

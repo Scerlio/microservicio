@@ -12,4 +12,14 @@ export class UsuarioService {
   getRequest(url: string): Observable<any> {
     return this.http.get(url);
   }
+
+  deleteRequest(id: string): Observable<any> {
+    const url = `http://localhost:8080/consumer/borrar/${id}`;
+    return this.http.delete(url);
+  }
+
+  buscarRequest(apellido: string): Observable<any> {
+    const url = `http://localhost:8080/consumer/buscar?apellido=${apellido}`;
+    return this.http.get(url);
+  }
 }

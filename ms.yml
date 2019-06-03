@@ -82,8 +82,7 @@ services:
      - zoo1
      - kafka1
      - kafka2
-     - kafka3
-     
+     - kafka3     
     ports:
      - "8112"
     networks:
@@ -97,7 +96,6 @@ services:
      - kafka1
      - kafka2
      - kafka3
-     - eureka
     ports:
      - "8111"
     networks:
@@ -111,9 +109,20 @@ services:
      - eureka
     ports:
      - "8080:8080"
+
   eureka:
     image: eureka-server
     networks:
      - v2
     ports:
      - "8761"
+
+  front:
+    image: front
+    depends_on:
+     - consumer
+     - producer
+    ports:
+      - "4200:4200"
+    networks:
+      - v2
