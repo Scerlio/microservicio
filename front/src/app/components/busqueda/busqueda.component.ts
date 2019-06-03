@@ -2,22 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-lista',
-  templateUrl: './lista.component.html',
-  styleUrls: ['./lista.component.css']
+  selector: 'app-busqueda',
+  templateUrl: './busqueda.component.html',
+  styleUrls: ['./busqueda.component.css']
 })
-export class ListaComponent implements OnInit {
+export class BusquedaComponent implements OnInit {
 
   result: any;
+  apellidoUsuario: string = '';
 
   constructor(private service: UsuarioService) { }
 
   ngOnInit() {
-    this.getApiInfo();
   }
 
-  getApiInfo() {
-    this.service.getRequest('http://localhost:8080/consumer/listar').subscribe(
+  buscarUsuario() {
+    this.service.buscarRequest(this.apellidoUsuario).subscribe(
       data => this.processResult(data),
       error => this.processError(error),
       () => this.processFinal()
@@ -39,4 +39,5 @@ export class ListaComponent implements OnInit {
     this.service.deleteRequest(index).subscribe();
   }
 
+  
 }
