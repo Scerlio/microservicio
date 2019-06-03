@@ -6,6 +6,6 @@ services:
   front:
     image: front
     ports:
-      - 80:80/tcp
+      - 4200:4200
     networks:
       - v2

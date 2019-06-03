@@ -22,7 +22,7 @@ public class Controlador {
 	}
 	
 	@GetMapping("/listar")
-	@CrossOrigin("http://localhost:80")
+	@CrossOrigin("http://localhost:4200")
 	public  List<Usuario> listarUsuarios() {
 		return gu.listar();
 	}
